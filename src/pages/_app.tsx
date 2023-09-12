@@ -1,26 +1,19 @@
-import { globalStyle } from "@/styles/global";
+import { globalStyles } from "@/styles/global";
 import type { AppProps } from "next/app";
-import LogoSvg from "@/assets/logo.svg";
-import { Container, Header } from "@/styles/pages/app";
-import Image from "next/image";
-import { Roboto } from "next/font/google";
+import { Container } from "@/styles/pages/app";
+import { Header } from "@/components/Header";
+import { CartContextProvider } from "@/contexts/CartContext";
 
-globalStyle();
-
-const roboto = Roboto({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-roboto",
-});
+globalStyles();
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <Container className={roboto.className}>
-      <Header>
-        <Image src={LogoSvg} alt="" />
-      </Header>
+    <CartContextProvider>
+      <Container>
+        <Header />
 
-      <Component {...pageProps} />
-    </Container>
+        <Component {...pageProps} />
+      </Container>
+    </CartContextProvider>
   );
 }
